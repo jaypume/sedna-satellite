@@ -1,0 +1,5 @@
+classes= 80
+# valid  = coco_testdev
+names = data/coco.names
+# eval=coco
+

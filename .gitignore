@@ -1,0 +1,8 @@
+
+*.weights
+*.jpg
+*.png
+*.list
+
+
+dota_yolov3_resnet18
