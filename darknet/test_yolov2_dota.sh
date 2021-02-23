@@ -1,5 +1,5 @@
-./darknet detector test cfg/dota.data cfg/yolo-dota.cfg /models/yolo-dota.cfg_450000.weights \
-  ./images/airplane01.jpg \
+./darknet detector test /root/darknet/cfg/dota.data /root/darknet/cfg/yolo-dota.cfg /models/yolo-dota.cfg_450000.weights \
+  /root/darknet/images/airplane01.jpg \
   -thresh 0.1
 
 

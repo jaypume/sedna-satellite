@@ -2,7 +2,9 @@
 *.weights
 *.jpg
 *.png
+*.tif
 *.list
+*.txt
 
 
 dota_yolov3_resnet18

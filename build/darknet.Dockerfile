@@ -25,6 +25,7 @@ RUN cd darknet-nnpack && \
     sed -i "/^LIBSO=0/c LIBSO=1" Makefile && \
     make
 RUN apt-get install -y python3
+RUN apt-get install -y vim
 
 COPY ./models /models
 
@@ -34,7 +35,8 @@ COPY ./darknet /root/darknet
 #RUN cp /root/darknet-nnpack/darknet  /root/darknet/
 #RUN cp /root/darknet-nnpack/libdarknet.so /root/darknet/
 RUN cp /root/darknet/darknet.py /root/darknet-nnpack/
-ENTRYPOINT ["python", "darknet.py"]
+RUN cp /root/darknet/inference.py /root/darknet-nnpack/
+ENTRYPOINT ["python3", "inference.py"]
 
 
 
