@@ -29,14 +29,10 @@ RUN apt-get install -y vim
 
 COPY ./models /models
 
-
-WORKDIR /root/darknet-nnpack
 COPY ./darknet /root/darknet
-#RUN cp /root/darknet-nnpack/darknet  /root/darknet/
-#RUN cp /root/darknet-nnpack/libdarknet.so /root/darknet/
-RUN cp /root/darknet/darknet.py /root/darknet-nnpack/
-RUN cp /root/darknet/inference.py /root/darknet-nnpack/
-ENTRYPOINT ["python3", "inference.py"]
+RUN cp /root/darknet-nnpack/darknet  /root/darknet/
+WORKDIR /root/darknet
+ENTRYPOINT ["python3", "main.py"]
 
 
 

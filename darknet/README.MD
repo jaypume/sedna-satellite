@@ -7,9 +7,24 @@
 ### 启动命令
 
 ```shell
-docker run -it -v ~/workspace/satellite/output:/root/output --env OUTPUT_FILE_PATH=/root/output swr.cn-south-1.myhuaweicloud.com/satellite/satellite:darknet
+docker run -it \
+      -v ~/workspace/satellite/output:/root/output \
+      -v ~/workspace/satellite/script:/root/script \
+      -e OUTPUT_FILE_PATH=/root/output \
+      -e SCRIPT_FILE_PATH=/root/script \
+      swr.cn-south-1.myhuaweicloud.com/satellite/satellite:darknet
 ```
 
 ### 查看结果
 
 在主机`~/workspace/satellite/output`路径下可以看到预测结果的图片生成。
+
+
+### 脚本覆盖
+
+把新的推理脚本放到主机路径的 `~/workspace/satellite/script`（根据卫星给定的路径，并且在docker启动命令中做对应的修改），
+
+推理脚本约束：
+
+- 名称为 *inference.py*
+- 包含一个无参方法 *run()*
