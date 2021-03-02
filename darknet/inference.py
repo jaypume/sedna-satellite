@@ -11,6 +11,7 @@ command_tiny = './darknet detector test cfg/coco.data cfg/yolov3-tiny.cfg ' \
                '/models/yolov3-tiny.weights \
                 {0} -dont_show'
 
+COMMAND = command_dota
 OUTPUT_FILE_PATH = os.getenv('OUTPUT_FILE_PATH', './')
 
 
@@ -40,6 +41,6 @@ def run():
         image_path = os.path.join(images_root, image)
         image_name = image.split('.')[0]
         print(f'current file is {image_path}')
-        output = _run_shell_command(command_tiny.format(image_path))
+        output = _run_shell_command(COMMAND.format(image_path))
         _copy_file('predictions.jpg', os.path.join(OUTPUT_FILE_PATH, f'{image_name}.jpg'))
         _save_txt_result(output, image_name)
