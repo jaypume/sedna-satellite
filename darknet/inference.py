@@ -21,7 +21,7 @@ def _run_shell_command(command):
 
 
 def _save_txt_result(output, image_name):
-    with open(os.path.join(OUTPUT_FILE_PATH, f'{image_name}.txt'), 'w+') as f:
+    with open(os.path.join(OUTPUT_FILE_PATH, f'{image_name}.txt'), 'w') as f:
         f.write(output)
 
 
@@ -34,13 +34,21 @@ def _copy_file(source, target):
         print("Unexpected error:", sys.exc_info())
 
 
+def exist(image_path_predicted):
+    return os.path.exists(image_path_predicted)
+
+
 def run():
     images_root = '/root/darknet/images/airplane'
     images = os.listdir(images_root)
     for image in images:
         image_path = os.path.join(images_root, image)
         image_name = image.split('.')[0]
-        print(f'current file is {image_path}')
-        output = _run_shell_command(COMMAND.format(image_path))
-        _copy_file('predictions.jpg', os.path.join(OUTPUT_FILE_PATH, f'{image_name}.jpg'))
-        _save_txt_result(output, image_name)
+        image_path_predicted = os.path.join(OUTPUT_FILE_PATH, f'{image_name}.jpg')
+        if exist(image_path_predicted):
+            print(f'{image_path} is already predicted, now skip it.')
+        else:
+            print(f'{image_path} is not predicted, start to predict it.')
+            output = _run_shell_command(COMMAND.format(image_path))
+            _copy_file('predictions.jpg', image_path_predicted)
+            _save_txt_result(output, image_name)
