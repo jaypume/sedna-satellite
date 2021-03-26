@@ -84,10 +84,8 @@ def _delete_oldest_files_if_is_full():
 def _calculate_area_and_crop_images(json_file, prefix, gsd_v=0.0):
     with open(json_file, 'r') as f:
         json_dict = json.load(f)
-    # image = cv2.imread(json_dict['filename'])
-    image = Image.open('./P0082.jpeg')
+    image = Image.open(json_dict[0]['filename'])
     width, height = image.size
-    # height, width, _ = image.shape  # original image size
 
     with open(f'{prefix}.csv', 'w') as f:
         for i, obj in enumerate(json_dict[0]['objects']):
@@ -155,7 +153,3 @@ def run():
         _copy_file('result.json', json_path_predicted)
         crop_image_prefix = f'{OUTPUT_FILE_PATH}/{cur_time}.{image_name}'
         _calculate_area_and_crop_images('result.json', crop_image_prefix, gsd_v=GSD_VALUE)
-
-
-if __name__ == '__main__':
-    _calculate_area_and_crop_images('result.json', './', 1.0)

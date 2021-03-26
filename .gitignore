@@ -5,6 +5,7 @@
 *.tif
 *.list
 *.txt
+*.jpeg
 
 
 dota_yolov3_resnet18
